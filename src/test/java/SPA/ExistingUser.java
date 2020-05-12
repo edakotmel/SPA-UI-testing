@@ -69,15 +69,10 @@ public class ExistingUser {
         $(By.xpath("//select[@id='countryCode']")).selectOption("US");
         $(By.xpath("//input[@placeholder='State/province']")).sendKeys(Keys.chord(Keys.CONTROL,"a", Keys.DELETE));
         $(By.xpath("//input[@placeholder='State/province']")).sendKeys("michigan");
-        //sleep(2000);
         $(By.xpath("//div[@title='Michigan']")).click();
-        //sleep(2000);
         $(By.xpath("//input[@name='city']")).sendKeys(Keys.chord(Keys.CONTROL,"a", Keys.DELETE));
         $(By.xpath("//input[@name='city']")).setValue("Michigan");
         $(By.xpath("//div[@title='Michigan Center (Jackson County)']")).click();
-        //sleep(2000);
-        //$(By.xpath("//input[@name='city']")).selectOptionContainingText("Michigan Center (Jackson County)");
-        //sleep(200);
         $(By.xpath("//input[@id='postalCode']")).setValue("10000");
         $(By.xpath("(//div[contains(.,'SAVE')])[23]")).click();
 
