@@ -1,6 +1,8 @@
 package SPA;
 
 import com.codeborne.selenide.Condition;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -10,7 +12,8 @@ import static com.codeborne.selenide.Selenide.*;
 
 public class ExistingUser {
 
-    @Test
+
+    @Before
     public void UserLogin() {
 
         open("https://profiles-single-page-application.mwwnxtpreprod.monster-next.com/");
@@ -25,12 +28,21 @@ public class ExistingUser {
         $(By.xpath("//input[contains(@id,'password')]")).sendKeys("HovnocuC123");
         $(By.xpath("//span[@class='btn-content'][contains(.,'Continue with Email')]")).click();
         sleep(1000);
-
-        //go to profile page
+    }
+       /* //go to profile page
         $(By.xpath("//span[@id='account-user']")).click();
         $(By.xpath("//div[contains(@id,'account-dropdown-my-profile')]")).click();
+        sleep(1000);*/
+
+       @After
+       public void UserLogout() {
+
+        $(By.xpath("//span[@id='account-user']")).click();
+        $(By.xpath("//div[@id='account-dropdown-logout']")).click();
+        closeWebDriver();
+
     }
-/*
+
     @Test
         public void UserEditContactInfo() {
             //setting a new contact info
@@ -100,9 +112,9 @@ public class ExistingUser {
         $(By.xpath("//a[@id='profile-description-section-edit']")).click();
         $(By.xpath("//textarea[@id='description']")).clear();
         $(By.xpath("(//div[contains(.,'SAVE')])[22]")).click();
-    }*/
+    }
     @Test
-    public void UserEditWorkExperience() {
+    public void UserCreateWorkExperience() {
         //Creating new experience entry
         $(By.xpath("(//span[@class='btn-content'][contains(.,'ADD')])[3]")).click();
         $(By.xpath("//input[@name='company.name']")).setValue("Monster");
@@ -135,9 +147,11 @@ public class ExistingUser {
         $("#profile-experience-section-collapse > div.IC67WZBhkFFkq0qTL6gpO.KPe8xLEsv76QjiLDbIfd0 > div:nth-child(6)").shouldHave(Condition.text("5/2010 - 6/2015 (5.2 years)"));
         $("#profile-experience-section-collapse > div.IC67WZBhkFFkq0qTL6gpO.KPe8xLEsv76QjiLDbIfd0 > div._2Ch80asm1l_FdgzsqQ6whA > pre").shouldHave(Condition.text("Eda Kotmel summary test"));
         $("#profile-experience-section-collapse > div.IC67WZBhkFFkq0qTL6gpO.KPe8xLEsv76QjiLDbIfd0 > ul > li").shouldHave(Condition.text("EK achievment"));
+    }
 
-
-        //Editing existing entry
+        @Test
+                public void UserEditexistingworkexperience(){
+                //Editing existing entry
         $(By.xpath("//a[@id='profile-experience-0-edit']")).click();
         $(By.xpath("//input[@name='company.name']")).sendKeys(Keys.chord(Keys.CONTROL, "a", Keys.DELETE));
         $(By.xpath("//input[@name='company.name']")).sendKeys("Monster");
@@ -174,8 +188,10 @@ public class ExistingUser {
         $("#profile-experience-section-collapse > div.IC67WZBhkFFkq0qTL6gpO.KPe8xLEsv76QjiLDbIfd0 > div:nth-child(6)").shouldHave(Condition.text("6/2011 - 7/2014 (3.2 years)"));
         $("#profile-experience-section-collapse > div.IC67WZBhkFFkq0qTL6gpO.KPe8xLEsv76QjiLDbIfd0 > div._2Ch80asm1l_FdgzsqQ6whA > pre").shouldHave(Condition.text("Eda Kotmel summary test 2"));
         $("#profile-experience-section-collapse > div.IC67WZBhkFFkq0qTL6gpO.KPe8xLEsv76QjiLDbIfd0 > ul > li:nth-child(2)").shouldHave(Condition.text("EK achievment 2"));
-
-        //Deletint the work experience
+    }
+       @Test
+               public void UserDeleteWorkExerience(){
+           //Deletint the work experience
         $("#profile-experience-0-edit").click();
         $(By.xpath("(//div[contains(.,'DELETE')])[23]")).click();
         $(By.xpath("(//span[contains(.,'Yes, delete this experience')])[2]")).click();
